@@ -1,0 +1,79 @@
+
+<!-- 原生小程序 -->
+
+<template>
+  <canvas canvas-id="canvasId" 
+          style='width:{{tWidth}}px; height:{{tHeight}}px; position:fixed; top:-2550px; left:0px' >
+  </canvas>
+</template>
+
+
+
+<script type="text/javascript">
+
+  Page({
+    /**
+     * 页面的初始数据
+     */
+    data: {
+      tWidth: 200,
+      tHeght: 200
+    }
+  })
+
+  sendImage: function(canvasId) {
+    wx.chooseImage({
+      sizeType: ['compressed'],
+      success: (res) => {
+        wx.showLoading({
+          title: '图片加载中',
+        })
+        this.drawCanvasAndSendImage(res.tempFilePaths[0], canvasId);
+      }
+    });
+  },
+  drawCanvasAndSendImage: function(filePath, canvasId) {
+    wx.getImageInfo({
+      src: filePath,
+      success: (res) => {
+        var ratio = 2;
+        var canvasWidth = res.width
+        var canvasHeight = res.height;
+        while (canvasWidth > 828 || canvasHeight > 1472) {
+          canvasWidth = Math.trunc(res.width / ratio)
+          canvasHeight = Math.trunc(res.height / ratio)
+          ratio++;
+        }
+        this.setData({
+          tWidth: canvasWidth,
+          tHeight: canvasHeight
+        })
+        const ctx = wx.createCanvasContext(canvasId);
+        ctx.drawImage(filePath, 0, 0, canvasWidth, canvasHeight);
+        ctx.draw();
+        setTimeout(() => {
+          this.sendImageFromCanvas(canvasId);
+        }, 300);
+      }
+    })
+  },
+  sendImageFromCanvas: function(canvasId) {
+    wx.canvasToTempFilePath({
+      canvasId: canvasId,
+      success: (res) => {
+        wx.uploadFile({
+          url: constant.imageHost + '/file/file/mobile/v1/image/file/upload',
+          filePath: res.tempFilePath,
+          name: 'file',
+          success: (res) => {
+            var data = JSON.parse(res.data);
+            var fileObj = data.data[0];
+            console.log(fileObj.fileId, fileObj.fileOriginalPath);    //得到返回的数据
+            wx.hideLoading();
+          }
+        });
+      }
+    });
+  }
+</script>
+  
