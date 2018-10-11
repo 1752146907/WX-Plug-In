@@ -1,0 +1,9 @@
+   
+   js文件引入const WxParse = require('../../wxParse/wxParse.js');
+
+   js页面数据赋值：WxParse.wxParse('数据名', 'html', 数据名, this, 5);
+
+
+   html页面文件引入<import src="../../wxParse/wxParse.wxml" />
+
+   html页面渲染<template is="wxParse" data="{{wxParseData: 数据名}}" />
