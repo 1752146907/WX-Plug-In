@@ -3,21 +3,19 @@
 
     <view wx:for="{{skeletonRectLists}}" 
           wx:key="{{index}}"
-          class="{{loading == 'chiaroscuro' ? 'chiaroscuro' : ''}}" 
-          style="width: {{item.width}}px; height: {{item.height}}px; background-color: rgb(194, 207, 214); position: absolute; left: {{item.left}}px; top: {{item.top}}px">
-
+          class="{{loading == 'chiaroscuro' ? 'chiaroscuro' : 'loading-spin'}} {{loading == 'shine' ? 'loading-shine' : ''}}"
+          style="width: {{item.width}}px; height: {{item.height}}px; background-color: #eaeae9; position: absolute; left: {{item.left}}px; top: {{item.top}}px">
     </view>
-    <view wx:for="{{skeletonCircleLists}}" 
+    <view wx:for="{{skeletonCircleLists}}"
           wx:key="{{index}}"
-          class="{{loading == 'chiaroscuro' ? 'chiaroscuro' : ''}}" 
-          style="width: {{item.width}}px; height: {{item.height}}px; background-color: rgb(194, 207, 214); border-radius: {{item.width}}px; position: absolute; left: {{item.left}}px; top: {{item.top}}px">
+          class="{{loading == 'chiaroscuro' ? 'chiaroscuro' : 'loading-spin'}} {{loading == 'shine' ? 'loading-shine' : ''}}"
+          style="width: {{item.width}}px; height: {{item.height}}px; background-color: #eaeae9; border-radius: {{item.width}}px; position: absolute; left: {{item.left}}px; top: {{item.top}}px">
 
     </view>
 
-    <view class="spinbox" 
-          wx:if="{{loading == 'spin'}}">
+    <view class="spinbox"
+          wx:if="{{loading === 'chiaroscuro'}}">
         <view class="spin"></view>
-
     </view>
 
 
