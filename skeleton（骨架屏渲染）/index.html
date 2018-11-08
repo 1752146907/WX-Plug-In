@@ -12,11 +12,12 @@ html页面文件引入: <skeleton selector="skeleton"
                           wx:if="{{showSkeleton}}"></skeleton>
 
 html所有内容用节点包起来：<view class="skeleton"></view>
+html所有要显示骨架的地方：<view class='skeleton-rect'></view>
 
 html获取节点: 以最小节点原则添加相应的class，不然绘制区域会大很多
 
 参数配置：
 Options	        Type	    Required	Default	    Description
 selector    	String	    No	        skelton	    绘制矩形就是class="skeleton-rect"，圆形就是class="skeleton-radius"
-loading	        String	    No	        spin	    骨架屏渲染时的动画，有spin和chiaroscuro
+loading	        String	    No	        spin	    骨架屏渲染时的动画，有spin、shine和chiaroscuro
 bgcolor	        String	    No	        #FFF	    骨架屏背景
