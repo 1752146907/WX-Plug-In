@@ -1,0 +1,13 @@
+<view style='width: 76%;padding-bottom: 20rpx;position: fixed;z-index: 9999;background-color: #fff;border-radius: 25rpx;display: flex;flex-direction: column;align-items: center;left: 11.7%;top: 5%' id='canvas-container' catchtouchmove='true'>
+<view style="width:488rpx;height:908rpx;margin: 0 auto;box-shadow:0px 0px 10px 5px #D8D7DD;">
+    <image wx:if="{{canimagePath}}"
+           mode="aspectFill"
+           style="width:488rpx;height:889rpx;"
+           src="{{canimagePath}}"></image>
+  </view>
+  
+    <canvas canvas-id="myCanvas" 
+            style="width:278px;height:524px;position:fixed;top: 999999" 
+            wx:if="{{!canimagePath}}"
+            id='myCanvas' />
+</view>
